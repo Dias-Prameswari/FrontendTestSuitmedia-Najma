@@ -21,8 +21,7 @@ export default function Banner({ imageUrl, title, subtitle }) {
       // Hanya aktif di desktop/tablet (>640px)
       if (window.innerWidth > 640) {
         const scrolled = window.scrollY;
-        // LIMIT efek parallax agar gambar tidak naik terlalu tinggi (max 2px aja, biar smooth)
-        setOffset(Math.min(scrolled * 0.1, 2)); // max 36px
+        setOffset(Math.min(scrolled * 0.15, 24)); //ramps naik sampai 24px, tercapai sekitar separuh tinggi banner
       }
     };
     // Tambah event scroll
@@ -35,25 +34,24 @@ export default function Banner({ imageUrl, title, subtitle }) {
     <div
       ref={bannerRef}
       className="relative h-[230px] sm:h-[260px] md:h-[300px] overflow-hidden"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", clipPath: polygon }}
     >
-      {/* Background gambar parallax */}
+      {/* Background gambar dibuat lebih tinggi dari container + digeser ke atas,
+      jadi ada 'bleed' margin, supaya saat translateY, ga ada area kosong yang nongol */}
       <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center will-change-transform"
+        className="absolute left-0 right-0 -top-[10%] h-[120%] bg-cover bg-center will-change-transform"
         style={{
           backgroundImage: `url(${imageUrl})`,
           transform: `translateY(${offset}px)`,
           transition: "transform 0.12s cubic-bezier(.4,0,.2,1)",
           zIndex: 1,
-          clipPath: polygon,
         }}
       />
-      {/* Overlay: biar tulisan jelas tapi area tetap miring (warna hitam transparan di atas gambar) */}
+      {/* Overlay: ikut ukuran container, otomatis ke clip oleh clip-path di parent */}
       <div
         className="absolute inset-0 z-10"
         style={{
-          background: "rgba(0,0,0,0.2)", // Overlay gelap tipis
-          clipPath: polygon, // Ikuti bentuk miring gambar
+          background: "rgba(0,0,0,0.2)",
         }}
       />
       {/* Teks judul & subjudul di tengah-tengah banner */}

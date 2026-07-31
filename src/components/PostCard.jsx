@@ -30,11 +30,7 @@ export default function PostCard({ post }) {
         alt={post.title}
         className="rounded-lg aspect-[4/3] object-cover  w-full h-40"
         loading="lazy"
-        onLoad={() => {
-        console.log("SUCCESS:", imgUrl);
-        }}
         onError={(e) => {
-          console.log("FAILED:", imgUrl);
           e.currentTarget.src = "/placeholder.jpg";
         }}
       />

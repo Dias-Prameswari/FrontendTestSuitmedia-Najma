@@ -49,10 +49,12 @@ export default function Header() {
   return (
     <header
       className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${show ? "" : "-top-20"}
+        fixed top-0 left-0 right-0 z-50 transition-transform duration-300
+        ${show ? "translate-y-0" : "-translate-y-full"}
         ${
-          scrolled ? "bg-[#FF6E0E] bg-opacity-90 backdrop-blur" : "bg-[#FF6E0E]"
+          scrolled 
+          ? "bg-[#FF6E0E]/70 backdrop-blur" 
+          : "bg-[#FF6E0E]"
         }
       `}
       style={{ boxShadow: show ? "0 2px 8px 0 rgba(0,0,0,0.05)" : "none" }}
