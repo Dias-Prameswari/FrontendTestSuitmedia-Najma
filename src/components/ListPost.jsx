@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select"; // manggil icon
 
 // Endpoint backend untuk daftar ideas
-const API_URL = "https://suitmedia-backend.suitdev.com/api/ideas";
+const API_URL = "/api/ideas";
 
 export default function ListPost() {
   //  Hooks untuk routing dan url params
@@ -28,8 +28,8 @@ export default function ListPost() {
   const searchParams = useSearchParams();
 
   // Ambil parameter page, size, sort dari url (query param)
-  const pageFromUrl = Number(searchParams.get("page")) || 1;
-  const sizeFromUrl = Number(searchParams.get("size")) || 10;
+  const pageFromUrl = Number(searchParams.get("page[number]")) || 1;
+  const sizeFromUrl = Number(searchParams.get("page[size]")) || 10;
   const sortFromUrl = searchParams.get("sort") || "-published_at";
 
   //  Local state untuk filter
@@ -57,8 +57,8 @@ export default function ListPost() {
   //  Update url param jika filter berubah (tanpa reload)
   useEffect(() => {
     const params = new URLSearchParams();
-    params.set("page", page);
-    params.set("size", size);
+    params.set("page[number]", page);
+    params.set("page[size]", size);
     params.set("sort", sort);
     router.replace(`?${params.toString()}`);
   }, [page, size, sort, router]);

@@ -8,7 +8,9 @@ export default function PostCard({ post }) {
   // Ambil url gambar (prioritas small_image, lalu medium_image, jika tidak ada pakai placeholder)
   // gambar placeholder.jpg ini gambar bunga
   const imgUrl =
-    post.small_image?.url || post.medium_image?.url || "/placeholder.jpg";
+    post.small_image?.[0]?.url || 
+    post.medium_image?.[0]?.url || 
+    "/placeholder.jpg";
 
   // Format tanggal terbit ke format Indonesia, misal: "17 Juli 2025"
   function formatDate(dateStr) {
@@ -28,6 +30,13 @@ export default function PostCard({ post }) {
         alt={post.title}
         className="rounded-lg aspect-[4/3] object-cover  w-full h-40"
         loading="lazy"
+        onLoad={() => {
+        console.log("SUCCESS:", imgUrl);
+        }}
+        onError={(e) => {
+          console.log("FAILED:", imgUrl);
+          e.currentTarget.src = "/placeholder.jpg";
+        }}
       />
       <div className="p-4 flex-1 flex flex-col">
         {/* Tanggal publish */}

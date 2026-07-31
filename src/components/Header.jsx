@@ -9,13 +9,12 @@ import Link from "next/link"; // routing SPA nextjs
 
 // menu navigasi
 const menu = [
-  { label: "Work", href: "/" },
-  // dibawah ini halamannya masih kosong
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Ideas", href: "/ideas" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Work", href: "/work" },   // ini halamannya masih kosong
+  { label: "About", href: "/about" },   // ini halamannya masih kosong
+  { label: "Services", href: "/services" }, 
+  { label: "Ideas", href: "/" },
+  { label: "Careers", href: "/careers" },  // ini halamannya masih kosong
+  { label: "Contact", href: "/contact" },  // ini halamannya masih kosong
 ];
 
 export default function Header() {
